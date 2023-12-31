@@ -20,7 +20,7 @@ def advertise_service(server_socket, service_id):
             service_id=uuid_obj,
             service_classes=[uuid_obj, bluetooth.SERIAL_PORT_CLASS],
             profiles=[bluetooth.SERIAL_PORT_PROFILE],
-            service_name="SNESController",
+            #service_name="SNESController",
         )
         return service_record
     except bluetooth.btcommon.BluetoothError as e:
