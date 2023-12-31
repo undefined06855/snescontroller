@@ -38,6 +38,12 @@ def main():
                     print("L")
                 elif event.code == "BTN_PINKIE":
                     print("R")
+
+                # start / select
+                elif event.code == "BTN_BASE3":
+                    print("Start")
+                elif event.code == "BTN_BASE4":
+                    print("Select")
             print("                                 ", event.ev_type, event.code, event.state)
 
 
