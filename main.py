@@ -12,16 +12,27 @@ def main():
                         print("d-left")
                     elif event.state == 127:
                         print("d-center")
-                    elif event.state == 256:
+                    elif event.state == 255:
                         print("d-right")
                 if event.code == "ABS_Y":
                     if event.state == 0:
                         print("d-up")
                     elif event.state == 127:
                         print("d-center")
-                    elif event.state == 256:
+                    elif event.state == 255:
                         print("d-down")
-            print(event.ev_type, event.code, event.state)
+                
+            if event.ev_type == "Key":
+                # face buttons (can also test using Misc, but is a bit misleading)
+                if event.code == "BTN_THUMB":
+                    print("A")
+                elif event.code == "BTN_THUMB2":
+                    print("B")
+                elif event.code == "BTN_TRIGGER":
+                    print("X")
+                elif event.code == "BTN_TOP":
+                    print("Y")
+            print("                                 ", event.ev_type, event.code, event.state)
 
 
 if __name__ == "__main__":
