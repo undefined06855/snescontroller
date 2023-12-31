@@ -17,7 +17,7 @@ server_socket.listen(1)
 # Advertise the Bluetooth service
 bluetooth.advertise_service(server_socket, device_name,
                             service_id=service_uuid,
-                            service_classes=[service_uuid, bluetooth.SERIAL_PORT_CLASS],
+                            service_classes=[bluetooth.SERIAL_PORT_CLASS],
                             profiles=[bluetooth.SERIAL_PORT_PROFILE])
 
 #print(f"Waiting for connection on {bluetooth.port}")
