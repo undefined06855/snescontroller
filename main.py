@@ -3,8 +3,7 @@ from inputs import get_gamepad
 def main():
     """Just print out some event infomation when the gamepad is used."""
     while 1:
-        events = get_gamepad()
-        for event in events:
+        for event in get_gamepad():
             if event.ev_type == "Absolute":
                 # dpad movement
                 if event.code == "ABS_X":
