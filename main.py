@@ -1,18 +1,21 @@
-#!/usr/bin/env python3
-"""PyBluez ble example beacon.py
-
-Advertises a bluethooth low energy beacon for 15 seconds.
-"""
-
+from bluetooth import BluetoothSocket, RFCOMM
 import time
 
-from bluetooth.ble import BeaconService
+def start_emulator():
+    server_socket = BluetoothSocket(RFCOMM)
+    server_socket.bind(("", 1))
+    server_socket.listen(1)
 
-service = BeaconService()
+    print("Emulator waiting for connection...")
 
-service.start_advertising("11111111-2222-3333-4444-555555555555",
-                          1, 1, 1, 200)
-time.sleep(15)
-service.stop_advertising()
+    client_socket, address = server_socket.accept()
+    print(f"Accepted connection from {address}")
 
-print("Done.")
+    data = "Hello, Web Bluetooth!"
+    
+    while True:
+        client_socket.send(data)
+        time.sleep(1)
+
+if __name__ == "__main__":
+    start_emulator()
