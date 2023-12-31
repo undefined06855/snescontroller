@@ -34,7 +34,7 @@ def main():
                     print("Y")
                 
                 # bumpers
-                elif event.code == "BTN_TRIGGER":
+                elif event.code == "BTN_TOP2":
                     print("L")
                 elif event.code == "BTN_PINKIE":
                     print("R")
