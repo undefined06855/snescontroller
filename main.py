@@ -1,9 +1,13 @@
 import bluetooth
 import time
+import uuid
 
 def emulate_bluetooth_device():
     # Set the Bluetooth device name
     device_name = "SNESController"
+
+    # Generate a unique UUID for the service
+    service_uuid = str(uuid.uuid4())
 
     # Create a Bluetooth socket
     server_socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
@@ -11,7 +15,7 @@ def emulate_bluetooth_device():
     server_socket.listen(1)
 
     # Advertise the service
-    bluetooth.advertise_service(server_socket, "SNESControllerService", service_id=bluetooth.RFCOMM)
+    bluetooth.advertise_service(server_socket, "SNESControllerService", service_id=service_uuid)
 
     print(f"Emulating Bluetooth device: {device_name}")
 
