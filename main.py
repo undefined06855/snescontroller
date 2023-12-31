@@ -7,7 +7,7 @@ subprocess.run(["sudo", "hciconfig", "hci0", "piscan"])
 
 # Set up Bluetooth device information
 device_name = "SNESController"
-service_uuid = "77a1fabd-be72-41c5-888d-fa1dd471c184"
+service_uuid = "b032c868-0ffe-4cd9-8345-6b7115173b2f"
 
 # Create Bluetooth socket
 server_socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
