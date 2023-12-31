@@ -40,9 +40,9 @@ def main():
                     print("R")
 
                 # start / select
-                elif event.code == "BTN_BASE3":
-                    print("Start")
                 elif event.code == "BTN_BASE4":
+                    print("Start")
+                elif event.code == "BTN_BASE3":
                     print("Select")
             print("                                 ", event.ev_type, event.code, event.state)
 
