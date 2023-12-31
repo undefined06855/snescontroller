@@ -1,6 +1,15 @@
 import bluetooth
+import subprocess
 import time
 import uuid
+
+
+# Enable Bluetooth
+subprocess.run(["sudo", "hciconfig", "hci0", "up"])
+
+# Set the device to discoverable mode
+subprocess.run(["sudo", "hciconfig", "hci0", "piscan"])
+
 
 def emulate_bluetooth_device():
     # Set the Bluetooth device name
@@ -45,4 +54,5 @@ def emulate_bluetooth_device():
         print("Bluetooth emulation stopped.")
 
 if __name__ == "__main__":
+    setup_bluetooth()
     emulate_bluetooth_device()
