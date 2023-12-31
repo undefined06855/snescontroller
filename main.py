@@ -1,14 +1,16 @@
-
-from bluetooth import BluetoothSocket, RFCOMM, advertise_service
+from bluetooth import BluetoothSocket, RFCOMM, BluetoothDevice
 import time
 
+def set_device_name(new_name):
+    local_device = BluetoothDevice()
+    local_device.name = new_name
+
 def start_emulator():
+    set_device_name("RaspberryPiEmulator")
+
     server_socket = BluetoothSocket(RFCOMM)
     server_socket.bind(("", 1))
     server_socket.listen(1)
-
-    # Set the device name and advertise the service
-    advertise_service(server_socket, "RaspberryPiEmulator", service_id="12345678-1234-5678-1234-56789abcdef1")
 
     print("Emulator waiting for connection...")
 
