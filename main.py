@@ -1,6 +1,9 @@
 # Import necessary libraries
 import bluetooth
 import time
+import subprocess
+
+subprocess.run(["sudo", "hciconfig", "hci0", "piscan"])
 
 # Set up Bluetooth device information
 device_name = "SNESController"
