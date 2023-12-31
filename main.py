@@ -20,8 +20,8 @@ bluetooth.advertise_service(server_socket, "SNESController Service",
                             service_classes=[service_uuid, bluetooth.SERIAL_PORT_CLASS],
                             profiles=[bluetooth.SERIAL_PORT_PROFILE])
 
-print(f"Waiting for connection on {bluetooth.port}")
-
+#print(f"Waiting for connection on {bluetooth.port}")
+print("waiting for connection on any port")
 try:
     while True:
         # Accept connection from client
