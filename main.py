@@ -3,13 +3,29 @@ import subprocess
 import time
 import uuid
 
-
 # Enable Bluetooth
 subprocess.run(["sudo", "hciconfig", "hci0", "up"])
 
 # Set the device to discoverable mode
 subprocess.run(["sudo", "hciconfig", "hci0", "piscan"])
 
+
+def advertise_service(server_socket, service_id):
+    try:
+        uuid_obj = uuid.UUID(service_id)
+        #service_handle = server_socket.getpeername()[2] + 1
+        service_record = bluetooth.advertise_service(
+            server_socket,
+            "SNESControllerService",
+            service_id=uuid_obj,
+            service_classes=[uuid_obj, bluetooth.SERIAL_PORT_CLASS],
+            profiles=[bluetooth.SERIAL_PORT_PROFILE],
+            service_name="SNESController",
+        )
+        return service_record
+    except bluetooth.btcommon.BluetoothError as e:
+        print(f"Error advertising service: {e}")
+        return None
 
 def emulate_bluetooth_device():
     # Set the Bluetooth device name
@@ -24,7 +40,11 @@ def emulate_bluetooth_device():
     server_socket.listen(1)
 
     # Advertise the service
-    bluetooth.advertise_service(server_socket, "SNESControllerService", service_id=service_uuid)
+    service_record = advertise_service(server_socket, service_uuid)
+
+    if service_record is None:
+        server_socket.close()
+        return
 
     print(f"Emulating Bluetooth device: {device_name}")
 
@@ -54,5 +74,4 @@ def emulate_bluetooth_device():
         print("Bluetooth emulation stopped.")
 
 if __name__ == "__main__":
-    setup_bluetooth()
     emulate_bluetooth_device()
