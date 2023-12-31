@@ -1,9 +1,9 @@
-from bluetooth import BluetoothSocket, RFCOMM, BluetoothDevice
+import subprocess
+from bluetooth import BluetoothSocket, RFCOMM
 import time
 
 def set_device_name(new_name):
-    local_device = BluetoothDevice()
-    local_device.name = new_name
+    subprocess.run(["sudo", "hciconfig", "hci0", "name", new_name])
 
 def start_emulator():
     set_device_name("RaspberryPiEmulator")
