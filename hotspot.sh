@@ -4,6 +4,12 @@
 hotspot_name="SNESController"
 hotspot_password="snescontroller"
 
+# Log file path
+log_file="./log.txt"  # Replace with the actual path
+
+# Redirect all output to the log file
+exec &> "$log_file"
+
 # Stop services
 sudo systemctl stop dhcpcd
 sudo systemctl stop wpa_supplicant
@@ -29,3 +35,6 @@ sudo ip link set wlan0 up
 # Start services
 sudo systemctl start dhcpcd
 sudo systemctl start wpa_supplicant
+
+# Notify the user
+#echo "Hotspot setup completed. Check the log file for details: $log_file"
