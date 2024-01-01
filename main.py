@@ -6,15 +6,15 @@ hotspot_password = "snescontroller"
 
 # Command to create hotspot
 commands = [
-    f"sudo systemctl stop dhcpcd",
-    f"sudo ip link set wlan0 down",
-    f"sudo iw dev wlan0 set type ibss",
-    f"sudo ip link set wlan0 up",
+    "sudo systemctl stop dhcpcd",
+    "sudo ip link set wlan0 down",
+    "sudo iw dev wlan0 set type ibss",
+    "sudo ip link set wlan0 up",
     f"sudo iw dev wlan0 ibss join {hotspot_name} {hotspot_password} freq 2437",
-    f"sudo systemctl start dhcpcd"
+    "sudo systemctl start dhcpcd"
 ]
 
 # Execute the command
-for x in commands:
-    print("Executing " + x)
-    os.system(x)
+for command in commands:
+    print("Executing: " + command)
+    os.system(command)
