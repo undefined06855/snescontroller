@@ -11,9 +11,9 @@ commands = [
     "sudo systemctl stop wpa_supplicant",
     "sudo ip link set wlan0 down",
     f"sudo iw dev wlan0 del",
+    f"sudo ip link set wlan0 up",
     f"sudo iw dev wlan0 interface add {hotspot_name} type ibss",
     f"sudo iw dev {hotspot_name} ibss join {hotspot_name} {hotspot_password} freq 2437",
-    "sudo ip link set wlan0 up",
     "sudo systemctl start dhcpcd",
     "sudo systemctl start wpa_supplicant"
 ]
