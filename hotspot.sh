@@ -1,4 +1,6 @@
 #!/bin/bash
+# doesnt work!
+echo THIS DOESN'T WORK!!
 
 sudo systemctl stop dhcpcd
 sudo systemctl stop wpa_supplicant
