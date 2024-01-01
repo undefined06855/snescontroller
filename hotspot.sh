@@ -2,6 +2,7 @@
 hotspot_name="SNESController"
 hotspot_password="snescontroller"
 
+
 # Log file path
 log_file="./log2.txt"  # Replace with the actual path
 
