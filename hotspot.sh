@@ -5,7 +5,10 @@ hotspot_name="SNESController"
 hotspot_password="snescontroller"
 
 # Log file path
-log_file="./log3.txt"  # Replace with the actual path
+log_file="./log4.txt"  # Replace with the actual path
+
+# Generate a random MAC address for the BSSID
+random_bssid=$(printf '02:%02X:%02X:%02X:%02X:%02X\n' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))
 
 # Redirect all output to the log file
 exec &> "$log_file"
@@ -24,12 +27,10 @@ sudo rmmod brcmutil
 # Load the wireless driver with the correct mode
 sudo modprobe brcmfmac
 sudo modprobe brcmutil
-sudo iwconfig wlan0 mode ad-hoc
+sudo iw wlan0 set type ibss
 
 # Set the IBSS parameters
-sudo iwconfig wlan0 essid "$hotspot_name" mode ad-hoc
-sudo iwconfig wlan0 key off  # Disable encryption for ad-hoc
-sudo iwconfig wlan0 channel 6
+sudo iw dev wlan0 ibss join "$hotspot_name" $((2437)) HT20 fixed-freq $random_bssid
 
 # Bring wlan0 back up
 sudo ip link set wlan0 up
