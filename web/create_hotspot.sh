@@ -47,10 +47,11 @@ hotspot_name="SNESController"
 hotspot_password="snescontroller"
 
 # Log file path
-log_file="./FOREST.txt"  # Replace with the actual path
+# Don't need this, it's all setup in the startup.sh file
+#log_file="./FOREST.txt"
 
 # Redirect all output to the log file
-exec &> "$log_file"
+#exec &> "$log_file"
 
 # Stop services
 sudo systemctl stop dhcpcd

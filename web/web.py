@@ -4,6 +4,7 @@ HOST = "192.168.1.1"
 WEB_PORT = 80
 SOCKET_PORT = 1000
 
+print("Setting up server...")
 
 # Import necessary libraries
 from flask import Flask, send_from_directory
