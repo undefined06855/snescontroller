@@ -1,5 +1,5 @@
 # CODE FROM CREATE_HOTSPOT.SH MOVED INTO THE PYTHON FILE
-import os
+import subprocess
 import time
 
 print("--------- PYTHON START")
@@ -45,7 +45,7 @@ commands = [
 for command in commands:
     print("-----------------------------------------------------------------")
     print("executing %s" % command)
-    os.system(command)
+    subprocess.run(command, shell=True)
     print("executed")
     time.sleep(.1)
 
