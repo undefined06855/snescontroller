@@ -49,7 +49,6 @@
 
 # Set hotspot name and password
 hotspot_name="SNESController"
-hotspot_password="snescontroller"
 
 # Log file path
 # Don't need this, it's all setup in the startup.sh file

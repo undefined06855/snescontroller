@@ -4,6 +4,8 @@ import time
 
 print("--------- PYTHON START")
 
+name = "SNES Controller"
+
 commands = [
     "sudo systemctl stop dhcpcd",
     "sudo systemctl stop wpa_supplicant",
@@ -21,7 +23,7 @@ commands = [
     "sudo iwconfig wlan0 mode ad-hoc",
 
     # Set the IBSS parameters
-    "sudo iwconfig wlan0 essid \"$hotspot_name\" mode ad-hoc",
+    f"sudo iwconfig wlan0 essid {name} mode ad-hoc",
     "sudo iwconfig wlan0 key off",  # Disable encryption for ad-hoc
     "sudo iwconfig wlan0 channel 6",
 
