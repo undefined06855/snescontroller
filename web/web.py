@@ -1,3 +1,51 @@
+# CODE FROM CREATE_HOTSPOT.SH MOVED INTO THE PYTHON FILE
+import os
+
+commands = [
+    "sudo systemctl stop dhcpcd"
+    "sudo systemctl stop wpa_supplicant"
+
+    # Bring down wlan0
+    "sudo ip link set wlan0 down"
+
+    # Unload the wireless driver
+    "sudo rmmod brcmfmac"
+    "sudo rmmod brcmutil"
+
+    # Load the wireless driver with the correct mode
+    "sudo modprobe brcmfmac"
+    "sudo modprobe brcmutil"
+    "sudo iwconfig wlan0 mode ad-hoc"
+
+    # Set the IBSS parameters
+    "sudo iwconfig wlan0 essid \"$hotspot_name\" mode ad-hoc"
+    "sudo iwconfig wlan0 key off"  # Disable encryption for ad-hoc
+    "sudo iwconfig wlan0 channel 6"
+
+    # Bring wlan0 back up
+    "sudo ip link set wlan0 up"
+
+    # Configure IP address for wlan0
+    "sudo ifconfig wlan0 192.168.1.1 netmask 255.255.255.0 up"
+
+    # Use hostapd to set up the ad-hoc network
+    "sudo hostapd -B /etc/hostapd/hostapd.conf"
+
+    # Configure DHCP server for wlan0
+    "sudo dnsmasq -C /etc/dnsmasq.conf -d"
+]
+
+
+
+for command in commands:
+    print("executing %s" % command)
+    os.system(command)
+
+print("--- COMMANDS DONE ---")
+
+
+
+
 # Python code for hosting a normal server and a websocket server
 
 HOST = "192.168.1.1"

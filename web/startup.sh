@@ -10,8 +10,8 @@ echo deleting old logs...
 rm *.log
 echo git pulling...
 git pull origin main                                    &> gitpull.log
-# comment out the next few lines to enable ssh and disable the controller hotspot
-echo starting hotspot...
-./create_hotspot.sh                                     &> hotspotcreate.log
 
-# python script gets ran in create_hotspot now
+# comment out the next few lines to enable ssh and disable the controller hotspot
+
+python -u ./web.py                                      &> pythonwebstuff.log
+

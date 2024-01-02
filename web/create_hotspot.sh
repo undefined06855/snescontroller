@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# THESE COMMANDS ARE RAN IN web.py NOW
+
+
+
+
 # IF YOU EVER NEED TO SET THIS UP AGAIN:
 
 
