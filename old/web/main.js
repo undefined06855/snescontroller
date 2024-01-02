@@ -1,4 +1,4 @@
-let ws = new WebSocket("ws://localhost:1000")
+let ws = new WebSocket("ws://192.168.1.1:1000")
 
 ws.addEventListener("open", _ => {
     console.log("connected!")
