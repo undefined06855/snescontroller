@@ -1,5 +1,8 @@
 # CODE FROM CREATE_HOTSPOT.SH MOVED INTO THE PYTHON FILE
 import os
+import time
+
+print("--------- PYTHON START")
 
 commands = [
     "sudo systemctl stop dhcpcd",
@@ -38,10 +41,13 @@ commands = [
 
 
 for command in commands:
+    print("-----------------------------------------------------------------")
     print("executing %s" % command)
     os.system(command)
+    print("executed")
+    time.sleep(.1)
 
-print("--- COMMANDS DONE ---")
+print("------------------------------ COMMANDS DONE ---")
 
 
 
