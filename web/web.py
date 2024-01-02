@@ -37,7 +37,7 @@ commands = [
     "sudo hostapd -B /etc/hostapd/hostapd.conf",
 
     # Configure DHCP server for wlan0
-    "sudo dnsmasq -C /etc/dnsmasq.conf -d"
+    "sudo dnsmasq -C /etc/dnsmasq.conf -d &"
 ]
 
 
