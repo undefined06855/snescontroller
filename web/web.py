@@ -1,6 +1,6 @@
 # Python code for hosting a normal server and a websocket server
 
-HOST = "localhost"
+HOST = "192.168.1.1"
 WEB_PORT = 80
 SOCKET_PORT = 1000
 
