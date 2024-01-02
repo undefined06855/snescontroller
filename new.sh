@@ -5,7 +5,7 @@ hotspot_name="SNESController"
 hotspot_password="snescontroller"
 
 # Log file path
-log_file="/path/to/hotspot_setup.log"  # Replace with the actual path
+log_file="./NEWLOG.txt"  # Replace with the actual path
 
 # Redirect all output to the log file
 exec &> "$log_file"
