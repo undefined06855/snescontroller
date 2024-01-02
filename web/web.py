@@ -47,10 +47,11 @@ for command in commands:
     print("executing %s" % command)
     subprocess.run(command, shell=True)
     print("executed")
-    time.sleep(.1)
 
 print("------------------------------ COMMANDS DONE ---")
 
+# takes a bit for the last command to finish, hopefully not more than 2 seconds
+time.sleep(2)
 
 
 
