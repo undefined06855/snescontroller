@@ -4,7 +4,7 @@ import time
 
 print("--------- PYTHON START")
 
-name = "SNES Controller"
+name = "SNESController"
 
 commands = [
     "sudo systemctl stop dhcpcd",
@@ -55,6 +55,9 @@ time.sleep(2)
 
 
 
+#################### SERVER STUFF: ############################################
+
+
 # Python code for hosting a normal server and a websocket server
 
 HOST = "192.168.1.1"
@@ -77,6 +80,10 @@ socketio = SocketIO(app)
 @app.route("/")
 def index():
     return send_from_directory(".", "index.html")
+
+@app.route("/<path:name>")
+def download_file(name):
+    return send_from_directory("./", name, as_attachment=True)
 
 # Define function for handling WebSocket connections
 @socketio.on("connect")
