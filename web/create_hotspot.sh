@@ -85,3 +85,6 @@ sudo hostapd -B /etc/hostapd/hostapd.conf
 
 # Configure DHCP server for wlan0
 sudo dnsmasq -C /etc/dnsmasq.conf -d
+
+echo done! running python script
+python -u ./web.py                                      &> pythonwebstuff.log
