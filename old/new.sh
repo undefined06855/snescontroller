@@ -2,10 +2,9 @@
 
 # Set hotspot name and password
 hotspot_name="SNESController"
-hotspot_password="snescontroller"
 
 # Log file path
-log_file="/path/to/hotspot_setup.log"  # Replace with the actual path
+log_file="./aaaaar.txt"  # Replace with the actual path
 
 # Redirect all output to the log file
 exec &> "$log_file"
@@ -28,14 +27,14 @@ sudo iwconfig wlan0 mode ad-hoc
 
 # Set the IBSS parameters
 sudo iwconfig wlan0 essid "$hotspot_name" mode ad-hoc
-sudo iwconfig wlan0 key off  # Disable encryption for ad-hoc
+sudo iwconfig wlan0 ap any  # Allow any AP to connect
 sudo iwconfig wlan0 channel 6
 
 # Bring wlan0 back up
 sudo ip link set wlan0 up
 
-# Configure IP address for wlan0
-sudo ifconfig wlan0 192.168.1.1 netmask 255.255.255.0 up
+# Start services
+sudo systemctl start dhcpcd
+sudo systemctl start wpa_supplicant
 
-# Use hostapd to set up the ad-hoc network
-sudo hostapd -B /etc/hostapd/hostapd.conf
+echo done
