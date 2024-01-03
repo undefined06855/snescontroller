@@ -72,4 +72,7 @@ stick.on("update", data => {
         }
     }
     else console.warn("unknown!")
+
+    console.clear()
+    console.log(joypad)
 })
