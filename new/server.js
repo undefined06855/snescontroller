@@ -5,7 +5,7 @@ import { readFileSync } from "fs"
 // ----------------------------------------------------------------------------
 // normal server setup
 const indexhtml = readFileSync("./sites/index.html")
-console.log(indexhtml)
+const clientjs = readFileSync("./sites/scripts/client.js")
 
 const server = createServer((req, res) => {
     let url = req.url
@@ -15,6 +15,10 @@ const server = createServer((req, res) => {
         case "/":
             serverEndRequest(res, indexhtml)
             return
+        case "/scripts":
+            serverEndRequest(res, clientjs)
+            return
+
     }
 
     serverEndRequest(res, "404 :(")
