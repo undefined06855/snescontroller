@@ -1,14 +1,13 @@
 import { WebSocketServer } from "ws"
-// i cant get these to work with es6 formatting
-const http = require("http")
-const fs = require("fs")
+import { createServer } from "http"
+import { readFileSync } from "fs"
 
 // ----------------------------------------------------------------------------
 // normal server setup
-const indexhtml = fs.readFileSync("./sites/index.html")
+const indexhtml = readFileSync("./sites/index.html")
 console.log(indexhtml)
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
     let url = req.url
     
     switch(url)
