@@ -38,37 +38,46 @@ const buttonDataMap = {
     "9": "start"
 }
 
+function setButton(button, state)
+{
+    if (state !== undefined)
+        joypad[button] = state
+}
+
 stick.on("update", data => {
     //console.log("%s %s %s", button, data.value)
 
-    let button = "unknown"
+    let direction = "unknown"
     if (data.type == "BUTTON")
     {
-        button = buttonDataMap[data.number]
+        // button events are normal, a down and an up event
+        direction = buttonDataMap[data.number]
         let buttonWasPressed = data.value == 1
-        joypad[button] = buttonWasPressed
+        setButton(direction, buttonWasPressed)
     }
     else if (data.type == "AXIS")
     {
+        // d-pad events aren't normal, so we have to do this workaround
+
         // reset other values (e.g: if the button was left, right can't also be pressed)
         if (data.number == 0)
         {
             // x axis
-            joypad.d_left = false
-            joypad.d_right = false
+            setButton("d_left", false)
+            setButton("d_right", false)
         }
         else
         {
             // y axis
-            joypad.d_up = false
-            joypad.d_down = false
+            setButton("d_up", false)
+            setButton("d_down", false)
         }
 
         if (data.value != 0)
         {
             // if it isn't moved to the center, set the direction to true
-            button = stickDataMap[data.number][data.value]
-            joypad[button] = true
+            direction = stickDataMap[data.number][data.value]
+            setButton(direction, true)
         }
     }
     else console.warn("unknown!")
