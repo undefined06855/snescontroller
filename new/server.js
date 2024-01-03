@@ -1,6 +1,7 @@
 import { WebSocketServer } from "ws"
-import "http"
-import "fs"
+// i cant get these to work with es6 formatting
+const http = require("http")
+const fs = require("fs")
 
 // ----------------------------------------------------------------------------
 // normal server setup
