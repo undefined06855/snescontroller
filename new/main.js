@@ -18,12 +18,12 @@ let joypad = {
 
 const stickDataMap = {
     "0": {
-        "-32767": "d-left",
-        "32767": "d-right"
+        "-32767": "d_left",
+        "32767": "d_right"
     },
     "1": {
-        "-32767": "d-up",
-        "32767": "d-down"
+        "-32767": "d_up",
+        "32767": "d_down"
     }
 }
 
