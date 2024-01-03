@@ -14,6 +14,7 @@ const server = http.createServer((req, res) => {
     {
         case "/":
             serverEndRequest(res, indexhtml)
+            return
     }
 
     serverEndRequest(res, "404 :(")

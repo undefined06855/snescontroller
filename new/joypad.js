@@ -1,5 +1,5 @@
 import Joystick from "@hkaspy/joystick-linux"
-import { sendToClients } from "./server"
+import { sendToClients } from "./server.js"
 const stick = new Joystick("/dev/input/js0", { includeInit: true })
 
 let joypad = {
