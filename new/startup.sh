@@ -1,6 +1,11 @@
 #!/bin/bash
-
 echo Running...
+
+exit
+
+# make sure to do this before running the rest, else you'd need to actually take
+# out the sd card to change anything! I hope this works...
+git pull origin main
 
 sudo systemctl stop dhcpcd
 sudo systemctl stop wpa_supplicant

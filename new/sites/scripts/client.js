@@ -41,8 +41,8 @@ ws.addEventListener("message", async event => {
 
 async function startGame(url)
 {
-    if (url.endsWith(".nes")) nostalgist = await Nostalgist.nes("http://localhost/roms/"+url)
-    else if (url.endsWith(".smc")) nostalgist = await Nostalgist.snes("http://localhost/roms/"+url)
+    if (url.endsWith(".nes")) nostalgist = await Nostalgist.nes("http://192.168.1.1/roms/"+url)
+    else if (url.endsWith(".smc")) nostalgist = await Nostalgist.snes("http://192.168.1.1/roms/"+url)
 }
 
 async function endGame()

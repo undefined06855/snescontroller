@@ -69,13 +69,13 @@ export function sendToClients(data)
  */
 export function startServer()
 {
-    server.listen(80, "localhost", () => {
+    server.listen(80, "192.168.1.1", () => {
         console.log("Server started!")
     })
 
     const wss = new WebSocketServer({
         port: 1000,
-        host: "localhost"
+        host: "192.168.1.1"
     })
     
     wss.on("connection", async client => {
