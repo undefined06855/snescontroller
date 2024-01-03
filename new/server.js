@@ -1,11 +1,13 @@
 import { WebSocketServer } from "ws"
-import { createServer } from "http"
-import { readFileSync } from "fs"
+import { ServerResponse, createServer } from "http"
+import { readFileSync, createReadStream } from "fs"
 
-// ----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // normal server setup
 const indexhtml = readFileSync("./sites/index.html")
 const clientjs = readFileSync("./sites/scripts/client.js")
+const nostalgistjs = readFileSync("./sites/scripts/nostalgist.js")
+const rommapjs = readFileSync("./sites/scripts/rom_map.js")
 
 const server = createServer((req, res) => {
     let url = req.url
@@ -15,22 +17,38 @@ const server = createServer((req, res) => {
         case "/":
             serverEndRequest(res, indexhtml)
             return
-        case "/scripts":
+
+        case "/scripts/client.js":
             serverEndRequest(res, clientjs)
             return
 
+        case "/scripts/rom_map.js":
+            serverEndRequest(res, rommapjs)
+            return
+
+        case "/scripts/nostalgist.js":
+            serverEndRequest(res, nostalgistjs)
+            return
+
+        default:
+            // either doesnt exist or just a binary file
+            let failed = false
+            try { readAndSendBinaryData(res, "./sites"+url) }
+            catch(_) { failed = true }
+            if (!failed) return
     }
 
     serverEndRequest(res, "404 :(")
 })
-// ----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // websocket server setup
 /**
  * @type Array<WebSocket>
  */
 let connections = []
+// -----------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------
+
 
 
 /**
@@ -51,13 +69,13 @@ export function sendToClients(data)
  */
 export function startServer()
 {
-    server.listen(80, "192.168.1.1", () => {
+    server.listen(80, "localhost", () => {
         console.log("Server started!")
     })
 
     const wss = new WebSocketServer({
         port: 1000,
-        host: "192.168.1.1"
+        host: "localhost"
     })
     
     wss.on("connection", async client => {
@@ -69,6 +87,11 @@ export function startServer()
     })
 }
 
+/**
+ * @param {ServerResponse} res 
+ * @param {Object} data 
+ * @param {string} filetype 
+ */
 function serverEndRequest(res, data="", filetype="text/html")
 {
     // the access control allow origin actually doesn't matter, since this is
@@ -77,5 +100,28 @@ function serverEndRequest(res, data="", filetype="text/html")
     res.setHeader("Content-Type", filetype)
     res.write(data)
     res.end()
+}
+
+/**
+ * @param {ServerResponse} res 
+ * @param {string} path 
+ */
+function readAndSendBinaryData(res, path)
+{
+    const fileStream = createReadStream(decodeURI(path))
+
+    res.setHeader("Content-Type", "application/octet-stream")
+    res.setHeader("Content-Disposition", "attachment")
+
+    fileStream.pipe(res)
+
+    // Handle any errors during the streaming
+    fileStream.on("error", (error) => {
+        // this actuallt returns a ERR_INVALID_RESPONSE on chrome, but oh well
+        // also you will never see this console.error 
+        console.error(`Error reading and sending binary data: ${error.message}`)
+        res.statusCode = 500
+        res.end("500 Internal Server Error")
+    })
 }
 

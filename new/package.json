@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@hkaspy/joystick-linux": "^1.2.0"
+    "@hkaspy/joystick-linux": "^1.2.0",
+    "fs": "^0.0.1-security",
+    "ws": "^8.16.0"
   },
   "type": "module"
 }

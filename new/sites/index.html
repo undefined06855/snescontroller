@@ -4,9 +4,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SNESController Hub</title>
+        <style>
+            button:not(.no-large) {
+                width: 200px;
+                height: 200px;
+                font-size: 20px;
+            }
+        </style>
+        <title>SNES Controller Hub</title>
     </head>
     <body>
-        <script src="./scripts"></script>
+        <button onclick="startGame('Super Mario Bros.nes')">Super Mario Bros</button>
+        <button onclick="startGame('Super Mario World.smc')">Super Mario World</button>
+        <button onclick="endGame()" style="position:fixed;bottom:0;right:0;z-index:999999;" class="no-large">Exit</button>
+        <script src="./scripts/nostalgist.js"></script>
+        <script src="./scripts/rom_map.js"></script>
+        <script src="./scripts/client.js"></script>
     </body>
 </html>
