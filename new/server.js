@@ -8,6 +8,7 @@ const indexhtml = readFileSync("./sites/index.html")
 const clientjs = readFileSync("./sites/scripts/client.js")
 const nostalgistjs = readFileSync("./sites/scripts/nostalgist.js")
 const rommapjs = readFileSync("./sites/scripts/rom_map.js")
+const css = readFileSync("sites/style.css")
 
 const server = createServer((req, res) => {
     let url = req.url
@@ -30,12 +31,19 @@ const server = createServer((req, res) => {
             serverEndRequest(res, nostalgistjs)
             return
 
+        case "/style.css":
+            serverEndRequest(res, css)
+            return
+
         default:
-            // either doesnt exist or just a binary file
+            // either doesnt exist or just a rom binary file
             let failed = false
             try { readAndSendBinaryData(res, "./sites"+url) }
             catch(_) { failed = true }
             if (!failed) return
+            // if it failed it goes down to the 404
+            // but actually breaks a lot of http stuff
+            // oh well ¯\_(ツ)_/¯ shouldn't be accessing that stuff anyway
     }
 
     serverEndRequest(res, "404 :(")
