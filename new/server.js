@@ -10,6 +10,9 @@ const nostalgistjs = readFileSync("./sites/scripts/nostalgist.js")
 const rommapjs = readFileSync("./sites/scripts/rom_map.js")
 const css = readFileSync("sites/style.css")
 
+const fceummjs = readFileSync("sites/cores/fceumm_libretro.js")
+const snes9xjs = readFileSync("sites/cores/snes9x_libretro.js")
+
 const server = createServer((req, res) => {
     let url = req.url
     
@@ -34,9 +37,19 @@ const server = createServer((req, res) => {
         case "/style.css":
             serverEndRequest(res, css)
             return
+        
+        case "/cores/fceumm_libretro.js":
+            serverEndRequest(res, fceummjs)
+            return
+
+        case "/cores/snes9x_libretro.js":
+            serverEndRequest(res, snes9xjs)
+            return
+
 
         default:
-            // either doesnt exist or just a rom binary file
+            // either doesnt exist or just a rom binary file / wasm file that
+            // doesn't need to be cached
             let failed = false
             try { readAndSendBinaryData(res, "./sites"+url) }
             catch(_) { failed = true }

@@ -42,4 +42,4 @@ sudo dnsmasq -C /etc/dnsmasq.conf -d &
 
 sleep 2
 
-node main.js &
+sudo node main.js > ./nodelog.log

@@ -2,6 +2,24 @@ let ws = new WebSocket("ws://192.168.1.1:1000")
 
 let nostalgist = undefined
 
+const createNostalgistSettings = url => {
+    return {
+        rom: [url],
+
+        resolveCoreJs(core) {
+            return `http://192.168.1.1/cores/${core}_libretro.js`
+        },
+
+        resolveCoreWasm(core) {
+            return `http://192.168.1.1/cores/${core}_libretro.wasm`
+        },
+
+        resolveRom(file) {
+            return `http://192.168.1.1/roms/${file}`
+        }
+    }
+}
+
 let joypad = {
     "a": false,
     "b": false,
@@ -41,8 +59,20 @@ ws.addEventListener("message", async event => {
 
 async function startGame(url)
 {
-    if (url.endsWith(".nes")) nostalgist = await Nostalgist.nes("http://192.168.1.1/roms/"+url)
-    else if (url.endsWith(".smc")) nostalgist = await Nostalgist.snes("http://192.168.1.1/roms/"+url)
+    if (url.endsWith(".nes"))
+    {
+        nostalgist = await Nostalgist.launch({
+            core: "fceumm",
+            ...createNostalgistSettings(url)
+        })
+    }
+    else if (url.endsWith(".smc"))
+    {
+        nostalgist = await Nostalgist.launch({
+            core: "snes9x",
+            ...createNostalgistSettings(url)
+        })
+    }
 }
 
 async function endGame()
