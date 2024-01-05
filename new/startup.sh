@@ -41,6 +41,8 @@ sudo hostapd -B /etc/hostapd/hostapd.conf
 # Configure DHCP server for wlan0
 sudo dnsmasq -C /etc/dnsmasq.conf -d &
 
-sleep 13
+sleep 2
 
-sudo node main.js
+cd /home/pi/snescontroller/new
+
+sudo node main.js &> node.log
