@@ -23,27 +23,27 @@ const server = createServer((req, res) => {
             return
 
         case "/scripts/client.js":
-            serverEndRequest(res, clientjs)
+            serverEndRequest(res, clientjs, "text/javascript")
             return
 
         case "/scripts/rom_map.js":
-            serverEndRequest(res, rommapjs)
+            serverEndRequest(res, rommapjs, "text/javascript")
             return
 
         case "/scripts/nostalgist.js":
-            serverEndRequest(res, nostalgistjs)
+            serverEndRequest(res, nostalgistjs, "text/javascript")
             return
 
         case "/style.css":
-            serverEndRequest(res, css)
+            serverEndRequest(res, css, "text/css")
             return
         
         case "/cores/fceumm_libretro.js":
-            serverEndRequest(res, fceummjs)
+            serverEndRequest(res, fceummjs, "text/javascript")
             return
 
         case "/cores/snes9x_libretro.js":
-            serverEndRequest(res, snes9xjs)
+            serverEndRequest(res, snes9xjs, "text/javascript")
             return
 
 
@@ -88,7 +88,7 @@ export function sendToClients(data)
 /**
  * Starts the http server, and sets up the websocket server
  */
-export function startServer()
+export async function startServer()
 {
     server.listen(80, "192.168.1.1", () => {
         console.log("Server started!")
@@ -97,6 +97,10 @@ export function startServer()
     const wss = new WebSocketServer({
         port: 1000,
         host: "192.168.1.1"
+    })
+
+    wss.on("listening", _ => {
+        console.log("Websocket started!")
     })
     
     wss.on("connection", async client => {
