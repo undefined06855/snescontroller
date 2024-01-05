@@ -77,7 +77,7 @@ ws.addEventListener("message", async event => {
     //console.log("Ping: %s", ping)
     //console.log(joypad)
 
-    let nostalgistButton = button.replace("d_", "")
+    let nostalgistButton = changed.replace("d_", "")
     if (joypad[changed])
         nostalgist.pressDown(nostalgistButton)
     else
