@@ -41,6 +41,6 @@ sudo hostapd -B /etc/hostapd/hostapd.conf
 # Configure DHCP server for wlan0
 sudo dnsmasq -C /etc/dnsmasq.conf -d &
 
-sleep 5
+sleep 13
 
 sudo node main.js

@@ -35,6 +35,21 @@ let joypad = {
     "d_right": false
 }
 
+let prevJoypad = {
+    "a": false,
+    "b": false,
+    "x": false,
+    "y": false,
+    "l": false,
+    "r": false,
+    "start": false,
+    "select": false,
+    "d_up": false,
+    "d_down": false,
+    "d_left": false,
+    "d_right": false
+}
+
 ws.addEventListener("open", _ => {
     console.log("connected!")
 })
@@ -44,18 +59,29 @@ ws.addEventListener("message", async event => {
 
     let ping = Date.now() - jsonData.date
     joypad = jsonData.data
+    // loop through all and see what's changed
+    let changed
+    for (let [b, v] of Object.entries(joypad))
+    {
+        // button, value
+        if (prevJoypad[b] != v)
+        {
+            changed = b
+            break
+        }
+    }
+    prevJoypad = joypad
 
     // these lag the game more than you'd think... or maybe that's just me
     //console.clear()
     //console.log("Ping: %s", ping)
     //console.log(joypad)
 
-    for (let button of Object.keys(joypad))
-    {
-        let nostalgistButton = button.replace("d_", "")
-        if (joypad[button]) await nostalgist.pressDown(nostalgistButton)
-        else await nostalgist.pressUp(nostalgistButton)
-    }
+    let nostalgistButton = button.replace("d_", "")
+    if (joypad[changed])
+        nostalgist.pressDown(nostalgistButton)
+    else
+        nostalgist.pressUp(nostalgistButton)
 })
 
 async function startGame(url)
