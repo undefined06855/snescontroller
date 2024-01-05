@@ -5,7 +5,8 @@ echo Running...
 # out the sd card to change anything! I hope this works...
 # edit: IT FUCKING DIDNT I THINK I BROKE IT AAAAAAAAAAAAAAAAAARGH
 # YEAAH I FIXED IT DONT WORRY
-git pull origin main
+# temporarily disabled at the moment because it fucks things up I think
+#git pull origin main
 
 
 sudo systemctl stop dhcpcd
@@ -40,6 +41,6 @@ sudo hostapd -B /etc/hostapd/hostapd.conf
 # Configure DHCP server for wlan0
 sudo dnsmasq -C /etc/dnsmasq.conf -d &
 
-sleep 2
+sleep 5
 
-sudo node main.js > ./nodelog.log
+sudo node main.js
