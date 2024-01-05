@@ -45,9 +45,10 @@ ws.addEventListener("message", async event => {
     let ping = Date.now() - jsonData.date
     joypad = jsonData.data
 
-    console.clear()
-    console.log("Ping: %s", ping)
-    console.log(joypad)
+    // these lag the game more than you'd think... or maybe that's just me
+    //console.clear()
+    //console.log("Ping: %s", ping)
+    //console.log(joypad)
 
     for (let button of Object.keys(joypad))
     {
