@@ -4,6 +4,7 @@ echo Running...
 # make sure to do this before running the rest, else you'd need to actually take
 # out the sd card to change anything! I hope this works...
 # edit: IT FUCKING DIDNT I THINK I BROKE IT AAAAAAAAAAAAAAAAAARGH
+# YEAAH I FIXED IT DONT WORRY
 git pull origin main
 
 
