@@ -38,6 +38,7 @@ button:not(.exit) {
   height: 50px;
 
   border-top-left-radius: 20px;
+  z-index: 99;
 }
 
 #canvas {
